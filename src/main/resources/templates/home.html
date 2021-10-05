@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Covid Tracker Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.0.slim.js" integrity="sha256-sCexhaKpAfuqulKjtSY7V9H7QT0TCN90H+Y5NlmqOUE=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js" ></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <script src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap4.min.js" ></script>
+
+    <script language="JavaScript">
+    $(document).ready(function() {
+    $('#myTable').DataTable();
+} );
+</script>
+</head>
+
+<body>
+<div class="container">
+<h1>Covid Tracker Application</h1>
+<p> This application lists current number of cases reported by each state/city as well as gives latest covid cases</p>
+
+
+<div class="jumbotron">
+    <h5 class="display-7" th:text="${totalReportedCases}"></h5>
+    <p class="lead">Total Cases Reported as of Today</p>
+    <hr class="my-4">
+    <h5 class="display-7" th:text="${totalReportedNewCases}"></h5>
+    <p class="lead">Total New Cases Reported as of Yesterday</p>
+</div>
+    <table class="table table-striped table-dark table-hover" id="myTable">
+        <thead>
+    <tr>
+        <th>State</th>
+        <th>Country</th>
+        <th>Total Cases Reported</th>
+        <th th:text="${yesterday}"> Count</th>
+    </tr>
+        </thead>
+        <tbody>
+    <tr th:each="location : ${locationStats}">
+        <td th:text="${location.state}"></td>
+        <td th:text="${location.country}"></td>
+        <td th:text="${location.latestTotalCases}"></td>
+        <td th:text="${location.totalCasesYesterday}"></td>
+    </tr>
+        </tbody>
+</table>
+</div>
+</body>
+
+</html>
